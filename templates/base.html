@@ -5,11 +5,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS -->
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <title>{% block title %}{% endblock title %}</title>
 </head>
 <body>
-    {% block content %}
-    {% endblock content %}
+    <header class="header">
+        <div class="container">
+            <h1 class="header__title"><a href="{% url 'home' %}">Django Music player</a></h1>
+            <ul class="navigation">
+                <li class="navigation__link"><a href="{% url 'home' %}">Вся музыка</a></li>
+                <li class="navigation__link"><a href="{% url 'add_track' %}">Добавить музыку</a></li>
+                <li class="navigation__link"><a href="">Профиль</a></li>
+                <input style="margin-left: 20px; margin-right: 20px;" class="music_search" type="search" placeholder="Поиск музыки" />
+                <input type="submit" value="Искать" />
+            </ul>
+        </div>
+    </header>
+    <main class="main">
+        <div class="container">
+            {% block content %}{% endblock content %}
+        </div>
+    </main>
 </body>
 </html>

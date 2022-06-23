@@ -1,9 +1,11 @@
-from django.http import HttpResponse
-from django.shortcuts import render
 import os
+
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render
 
 from .models import Track
 from .forms import AddTrackForm
+from musicplayer.settings import BASE_DIR
 
 def home(request) -> render:
     """Главная страница."""
@@ -22,7 +24,7 @@ def add_track(request) -> render:
 
             Track.objects.create(title=track_title, author=track_author, \
                                     track=music)
-            return HttpResponse("track upload successful")
+            return HttpResponseRedirect("/")
         else:
-            return HttpResponse("form no valid")
+            return HttpResponse("form not valid")
     return render(request, "add_track.html", {"form": form})
