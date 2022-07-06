@@ -51,6 +51,7 @@ h1,h2,h3,h4,h5,h6{ font-size: inherit; font-weight: 400; }
 
 .navigation li {
     padding-left: 13px;
+    color: #fff;
 }
 /* ===================== */
 
@@ -75,14 +76,14 @@ form label {
     padding-top: 10px;
 }
 
-form input[type="text"] {
+form input {
     padding: 15px;
     border-radius: 10px;
     background-color: rgb(34, 34, 34);
     color: #fff;
 }
 
-form input[type="text"]:focus {
+form input:focus {
     transition: .5s;
     background-color: rgb(49, 49, 49);
 }

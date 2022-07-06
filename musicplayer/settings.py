@@ -28,6 +28,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "accounts/login"
+ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = False
+
+ACCOUNT_EMAIL_CONFIRMATION_EXPLORE_DAYS = 1
+ACCUNT_USERNAME_MIN_LENGTH = 4
+EMAIL_BACKEND = "django.core.mail.backends.dummy.EmailBackend"
 
 # Application definition
 
@@ -37,9 +44,20 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sites',
     'django.contrib.staticfiles',
 
-    'player',
+    # all auth
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.github',
+    'allauth.socialaccount.providers.google',
+
+    # apps
+    'core.apps.CoreConfig',
+    'users.apps.UsersConfig',
+
 ]
 
 MIDDLEWARE = [
@@ -53,6 +71,13 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'musicplayer.urls'
+
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
 
 TEMPLATES_DIR = os.path.join(BASE_DIR, "templates")
 
@@ -116,6 +141,10 @@ USE_I18N = True
 
 USE_TZ = True
 
+# Extend User
+AUTH_USER_MODEL = 'users.CustomUser'
+
+SITE_ID = 1
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/

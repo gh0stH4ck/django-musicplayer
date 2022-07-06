@@ -16,7 +16,11 @@
             <ul class="navigation">
                 <li class="navigation__link"><a href="{% url 'home' %}">Вся музыка</a></li>
                 <li class="navigation__link"><a href="{% url 'add_track' %}">Добавить музыку</a></li>
-                <li class="navigation__link"><a href="">Профиль</a></li>
+                {% if user.is_authenticated %}
+                    <li class="navigation__link"><a href="{% url 'profile' user_id=user.id %}">{{ user }}</a> | <a href="{% url 'account_logout' %}">Выйти</a></li>
+                {% else %}
+                    <li class="navigation__link"><a href="{% url 'account_login' %}">Войти</a> | <a href="{% url 'account_signup' %}">Зарегестрироваться</a></li>
+                {% endif %}
                 <input style="margin-left: 20px; margin-right: 20px;" class="music_search" type="search" placeholder="Поиск музыки" />
                 <input type="submit" value="Искать" />
             </ul>

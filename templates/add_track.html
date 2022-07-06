@@ -3,13 +3,17 @@
 {% block title %} Добавить трек {% endblock title %}
 
 {% block content %}
+{% if user.is_authenticated %}
+    <h1 class="add_music_title">Поделитесь свой музыкой!</h1>
 
-<h1 class="add_music_title">Поделитесь свой музыкой!</h1>
-
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Загрузить">
-</form>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Загрузить">
+    </form>
+{% else %}
+    <h2>Вы не зарегестрированы</h2>
+    <a href="{% url 'account_login' %}">Войдите</a>
+{% endif %}
 
 {% endblock content %}

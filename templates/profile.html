@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %} Профиль {% endblock title %}
+
+{% block content %}
+    <p style="color: #fff;">User: {{ usr.username }}</p>
+    <p style="color: #fff;">Email: {{ usr.email }}</p>
+    <img style="width: 500px; color: #fff; height: 500px" src="/static/images/user_avatars/{{ usr.avatar }}" alt="avatar not found">
+    {% if user.is_authenticated and usr.username == user.username %}
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Добавить фото" />
+        </form>
+    {% endif %}
+{% endblock content %}
